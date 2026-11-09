@@ -16,12 +16,6 @@ using namespace UnityEngine;
 
 static modloader::ModInfo modInfo{MOD_ID, VERSION, 0};
 
-// Loads the config from disk using our modInfo, then returns it for use
-Configuration& getConfig() {
-    static Configuration config(modInfo);
-    config.Load();
-    return config;
-}
 
 const Paper::ConstLoggerContext<sizeof(MOD_ID)>& getLogger() {
     static constexpr auto Logger = Paper::ConstLoggerContext(MOD_ID);
@@ -40,7 +34,6 @@ void DidActivate(HMUI::ViewController* self, bool firstActivation, bool addedToH
     GameObject* container = CreateScrollableSettingsContainer(self->get_transform());
     ToggleSetting* isEnabled = AddConfigValueToggle(container->get_transform(), getIntroSkipConfig().isEnabled);
     ToggleSetting* skipIntro = AddConfigValueToggle(container->get_transform(), getIntroSkipConfig().skipIntro);
-    ToggleSetting* skipMiddle = AddConfigValueToggle(container->get_transform(), getIntroSkipConfig().skipMiddle);
     ToggleSetting* skipOutro = AddConfigValueToggle(container->get_transform(), getIntroSkipConfig().skipOutro);
     SliderSetting* minSkipTime = AddConfigValueSliderIncrement(container->get_transform(), getIntroSkipConfig().minSkipTime, 0.1f, 2.5f, 10.0f);
     SliderSetting* minHoldTime = AddConfigValueSliderIncrement(container->get_transform(), getIntroSkipConfig().minHoldTime, 0.1f, 0.0f, 5.0f);
@@ -51,7 +44,6 @@ void DidActivate(HMUI::ViewController* self, bool firstActivation, bool addedToH
 
     AddHoverHint(isEnabled->get_gameObject(), "Enable the Intro Skip Mod");
     AddHoverHint(skipIntro->get_gameObject(), "Enable the ability to skip the beginning of songs");
-    AddHoverHint(skipMiddle->get_gameObject(), "Enable the ability to skip the middle sections of songs");
     AddHoverHint(skipOutro->get_gameObject(), "Enable the ability to skip the ending of songs");
     AddHoverHint(minSkipTime->get_gameObject(), "Minimum amount of downtime required to be able to skip that section of the song");
     AddHoverHint(minHoldTime->get_gameObject(), "How long you you are required to press the triggers for before it skips");
@@ -60,7 +52,7 @@ void DidActivate(HMUI::ViewController* self, bool firstActivation, bool addedToH
 
 // Called later on in the game loading - a good time to install function hooks
 INTRO_SKIP_EXPORT_FUNC void late_load() {
-    il2cpp_functions::Init();
+    i2c::functions::initialize();
     custom_types::Register::AutoRegister();
     getIntroSkipConfig().Init(modInfo);
     BSML::Init();

@@ -42,15 +42,9 @@ namespace IntroSkip::Utils {
         if (!mapValues.empty()) {
             std::sort(mapValues.begin(), mapValues.end(), [](auto &left, auto &right) { return left < right; });
             float currentTime = mapValues[0];
-            float skipIntro = getIntroSkipConfig().skipIntro.GetValue(), skipMiddle = getIntroSkipConfig().skipMiddle.GetValue();
+            float skipIntro = getIntroSkipConfig().skipIntro.GetValue();
             float skipOutro = getIntroSkipConfig().skipOutro.GetValue(), minSkipTime = getIntroSkipConfig().minSkipTime.GetValue();
             if (skipIntro && currentTime > minSkipTime) skipTimePairs.push_back(std::make_pair(0.1f, currentTime - 1.5f));
-            if (skipMiddle){
-                for (auto& time : mapValues){
-                    if (time - currentTime > minSkipTime) skipTimePairs.push_back(std::make_pair(currentTime, time - 1.5f));
-                    currentTime = time;
-                }
-            }
             if (skipOutro && songLength - mapValues.back() > minSkipTime) skipTimePairs.push_back(std::make_pair(mapValues.back(), songLength - 0.5f));
         }
         return skipTimePairs;

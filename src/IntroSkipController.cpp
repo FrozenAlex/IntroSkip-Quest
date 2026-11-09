@@ -44,7 +44,7 @@ namespace IntroSkip{
         if (skipItr == skipTimePairs.end()) return;
 
         float currentTime = _audioTimeSyncController->get_songTime(), bufferedCurrentTime = currentTime + 10 * UnityEngine::Time::get_deltaTime();
-        bool triggersPressed = this->triggersPressed(), notPaused = _audioTimeSyncController->get_state() == AudioTimeSyncController::State::Playing;
+        bool triggersPressed = this->triggersPressed(), notPaused = _audioTimeSyncController->get_state() == ::GlobalNamespace::IAudioTimeSource_State::Playing;
         float skipStart = skipItr->first, skipEnd = skipItr->second;
 
         if (skipEnd <= bufferedCurrentTime) return iterateToNextPair(); // passed end of skippable range
