@@ -14,6 +14,5 @@
 // It also allows creating objects, configuration, and importantly, hooking methods to modify their values
 #include "paper2_scotland2/shared/logger.hpp"
 #include "beatsaber-hook/shared/api.hpp"
-#include "beatsaber-hook/shared/hooking.hpp"
 
 const Paper::ConstLoggerContext<sizeof(MOD_ID)>& getLogger();

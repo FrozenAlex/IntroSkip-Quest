@@ -4,8 +4,7 @@
 
 #include "HMUI/ViewController.hpp"
 
-#include "lapiz/shared/zenject/Zenjector.hpp"
-#include "Installers/IntroSkipInstaller.hpp"
+#include "Gameplay.hpp"
 #include "bsml/shared/BSML.hpp"
 #include "bsml/shared/BSML-Lite/Creation/Layout.hpp"
 #include "bsml/shared/BSML-Lite/Creation/Misc.hpp"
@@ -50,14 +49,11 @@ void DidActivate(HMUI::ViewController* self, bool firstActivation, bool addedToH
     AddHoverHint(bothTriggers->get_gameObject(), "Require both triggers be pressed in order to skip. WHen disabled either trigger will skip");
 }
 
-// Called later on in the game loading - a good time to install function hooks
+// Register the menu and the process-lifetime, captureless gameplay callback.
 INTRO_SKIP_EXPORT_FUNC void late_load() {
     i2c::functions::initialize();
-    custom_types::Register::AutoRegister();
     getIntroSkipConfig().Init(modInfo);
     BSML::Init();
     BSML::Register::RegisterMainMenuViewControllerMethod("Intro Skip", "Intro Skip", "skip those intros or whatever", &DidActivate);
-    auto zenjector = Lapiz::Zenject::Zenjector::Get();
-    zenjector->Expose<GlobalNamespace::ComboUIController*>("Environment");
-    zenjector->Install<IntroSkip::Installers::IntroSkipInstaller*>(Lapiz::Zenject::Location::StandardPlayer);
+    IntroSkip::RegisterGameplayEvents();
 }

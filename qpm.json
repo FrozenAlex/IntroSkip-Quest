@@ -24,7 +24,7 @@
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "^9.3.0",
+      "versionRange": "=9.3.0",
       "additionalData": {}
     },
     {
@@ -40,18 +40,13 @@
       "additionalData": {}
     },
     {
-      "id": "custom-types",
-      "versionRange": "^0.21.2",
-      "additionalData": {}
-    },
-    {
       "id": "config-utils",
       "versionRange": "^3.0.0",
       "additionalData": {}
     },
     {
       "id": "bsml",
-      "versionRange": "^0.6.5",
+      "versionRange": "=0.6.5",
       "additionalData": {}
     },
     {
@@ -60,13 +55,28 @@
       "additionalData": {}
     },
     {
-      "id": "lapiz",
-      "versionRange": "^0.3.7",
+      "id": "reflectcpp",
+      "versionRange": "^0.25.0",
       "additionalData": {}
     },
     {
-      "id": "reflectcpp",
-      "versionRange": "^0.25.0",
+      "id": "flamingo",
+      "versionRange": "=1.2.1",
+      "additionalData": {}
+    },
+    {
+      "id": "metacore-bs",
+      "versionRange": "=1.0.1",
+      "additionalData": {}
+    },
+    {
+      "id": "metacore",
+      "versionRange": "=2.0.6",
+      "additionalData": {}
+    },
+    {
+      "id": "custom-types",
+      "versionRange": "^0.21.2",
       "additionalData": {}
     }
   ]
